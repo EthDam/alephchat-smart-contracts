@@ -1,5 +1,10 @@
 use ink::primitives::AccountId;
 use crate::message::{InitMessage, Message, MessageCreateCommand};
+use ink::{
+    env::Environment,
+    prelude::vec::Vec,
+};
+
 
 #[derive(scale::Decode, scale::Encode, Clone)]
 #[cfg_attr(
@@ -44,6 +49,15 @@ impl Chat {
         self.messages.push(Message::new(message, self.next_message_id, self.id));
         self.next_message_id += 1;
         return self;
+    }
+
+    pub fn get_cypher(self, account: AccountId) -> Vec<u8> {
+        for (it, i) in self.participants.iter().enumerate() {
+            if i.eq(&account) {
+                return self.encrypted_cypher.get(it).unwrap().clone();
+            }
+        }
+        panic!("something went wrong");
     }
 
 }

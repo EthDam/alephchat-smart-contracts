@@ -6,13 +6,13 @@ mod message;
 
 #[ink::contract]
 mod alephchat {
+    use ink::{
+        prelude::vec::Vec,
+    };
     use ink::storage::Mapping;
     use crate::chat::{Chat, ChatCreateCommand};
     use crate::message::{Message, MessageCreateCommand};
 
-    /// Defines the storage of your contract.
-    /// Add new fields to the below struct in order
-    /// to add new static storage fields to your contract.
     #[ink(storage)]
     pub struct AlephChat {
         pub chats: Mapping<u64, Chat>,
@@ -65,6 +65,22 @@ mod alephchat {
             self.chats.insert(chat_id, &updated_chat);
             updated_chat.messages.get(next_message_id).unwrap().clone()
         }
+
+        #[ink(message)]
+        pub fn get_messages(&self, chat_id: u64) -> Vec<Message> {
+            return self.chats.get(chat_id).unwrap().messages;
+        }
+
+        #[ink(message)]
+        pub fn get_cypher(&self, user: AccountId, chat_id: u64) -> Vec<u8> {
+            return self.chats.get(chat_id).unwrap().get_cypher(user);
+        }
+
+        #[ink(message)]
+        pub fn get_user_chats(&self, user: AccountId) -> Vec<u64> {
+            return self.user_chats.get(user).unwrap();
+        }
+
     }
 }
 

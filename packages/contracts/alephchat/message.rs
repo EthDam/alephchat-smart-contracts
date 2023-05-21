@@ -1,6 +1,10 @@
 use ink::env;
+use ink::env::DefaultEnvironment;
 use ink::primitives::AccountId;
-use ink_env::DefaultEnvironment;
+use ink::prelude::string::String;
+use ink::{
+    prelude::vec::Vec,
+};
 
 
 #[derive(scale::Decode, scale::Encode, Clone)]
@@ -12,7 +16,7 @@ pub struct Message {
     pub id: u64,
     pub chat_id: u64,
     pub author: AccountId,
-    pub message: String,
+    pub message: ink::prelude::string::String,
     pub timestamp: u64,
 }
 

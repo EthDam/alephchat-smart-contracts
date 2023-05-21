@@ -10,11 +10,11 @@ const main = async () => {
   const chain = getSubstrateChain('alephzero-testnet' || 'development')
   console.log(chain)
   if (!chain) throw new Error(`Chain '${process.env.CHAIN}' not found`)
-  const accountUri = process.env.ACCOUNT_URI || '////SE7EN'
+  const accountUri = process.env.ACCOUNT_URI || '//SE7EN'
   const { api, account } = await initPolkadotJs(chain, accountUri)
 
   // Deploy greeter contract
-  let { abi, wasm } = await getDeploymentData('greeter')
+  let { abi, wasm } = await getDeploymentData('alephchat')
   const { address: greeterAddress } = await deployContract(api, account, abi, wasm, 'default', [])
 
   // Write contract addresses to `{contract}/{network}.ts` files
