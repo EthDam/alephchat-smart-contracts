@@ -81,6 +81,11 @@ mod alephchat {
             return self.user_chats.get(user).unwrap();
         }
 
+        #[ink(message)]
+        pub fn get_participants(&self, chat_id: u64) -> Vec<AccountId> {
+            return self.chats.get(chat_id).unwrap().participants;
+        }
+
     }
 }
 
