@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0x6057916223c692f0dc5e2a61afb79e9a6af69d8eedb1069c3647ad72ea9298fc",
+    "hash": "0xd6f1f4895376cb940446658305be71d766e5c011bd23efe5291d5f6d5dc25216",
     "language": "ink! 4.2.0",
     "compiler": "rustc 1.68.2",
     "build_info": {
@@ -17,7 +17,8 @@
     "name": "alephchat",
     "version": "0.1.0",
     "authors": [
-      "[your_name] <[your_email]>"
+      "Maciek Malik <poczta@maciekmalik.pl>",
+      "Piotr Swierzy"
     ]
   },
   "spec": {
@@ -50,25 +51,25 @@
         "displayName": [
           "Balance"
         ],
-        "type": 22
+        "type": 23
       },
       "blockNumber": {
         "displayName": [
           "BlockNumber"
         ],
-        "type": 24
+        "type": 25
       },
       "chainExtension": {
         "displayName": [
           "ChainExtension"
         ],
-        "type": 25
+        "type": 26
       },
       "hash": {
         "displayName": [
           "Hash"
         ],
-        "type": 23
+        "type": 24
       },
       "maxEventTopics": 4,
       "timestamp": {
@@ -234,6 +235,32 @@
           "type": 21
         },
         "selector": "0x7047dd35"
+      },
+      {
+        "args": [
+          {
+            "label": "chat_id",
+            "type": {
+              "displayName": [
+                "u64"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "get_participants",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 22
+        },
+        "selector": "0x817e813f"
       }
     ]
   },
@@ -840,12 +867,54 @@
       "id": 22,
       "type": {
         "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 1
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 13
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 1
+          },
+          {
+            "name": "E",
+            "type": 13
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": {
+        "def": {
           "primitive": "u128"
         }
       }
     },
     {
-      "id": 23,
+      "id": 24,
       "type": {
         "def": {
           "composite": {
@@ -865,7 +934,7 @@
       }
     },
     {
-      "id": 24,
+      "id": 25,
       "type": {
         "def": {
           "primitive": "u32"
@@ -873,7 +942,7 @@
       }
     },
     {
-      "id": 25,
+      "id": 26,
       "type": {
         "def": {
           "variant": {}
